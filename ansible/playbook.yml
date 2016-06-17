@@ -1,0 +1,4 @@
+---
+- include: common.yml
+- include: nginx.yml
+- include: postgresql.yml

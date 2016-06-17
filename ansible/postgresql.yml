@@ -1,0 +1,38 @@
+---
+- hosts: postgresql
+  become: true
+  roles:
+    - role: pkorobeinikov.apt-repository
+      apt_repository_repositories:
+        - repo: deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
+          key: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+
+    - role: pkorobeinikov.postgresql
+      postgresql_version: 9.5
+      postgresql_package_version: 9.5.3-1.pgdg14.04+1
+      postgresql_hba_template: postgresql/pg_hba.conf.j2
+      postgresql_conf_template: postgresql/postgresql.conf.j2
+
+    - role: pkorobeinikov.pgbouncer
+      pgbouncer_package_version: 1.7.2-1.pgdg14.04+1
+      pgbouncer_pgbouncer_ini_template: pgbouncer/pgbouncer.ini.j2
+      pgbouncer_userlist_txt_template: pgbouncer/userlist.txt.j2
+
+  tasks:
+    - name: install psycopg2
+      apt: name={{ item }} state=present
+      with_items:
+        - libpq-dev
+        - python-psycopg2
+
+    - name: create postgresql user
+      postgresql_user: name={{ item.name }} password={{ item.password }}
+      with_items:
+        - { name: 'app', password: 'app' }
+      become_user: postgres
+
+    - name: create postgresql database
+      postgresql_db: name={{ item }} owner=app encoding='UTF-8' template='template1'
+      become_user: postgres
+      with_items:
+        - app

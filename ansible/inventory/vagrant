@@ -1,0 +1,11 @@
+flask-app-example   ansible_ssh_host=127.0.0.1 ansible_ssh_port=2220 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='../.vagrant/machines/flask-app-example/virtualbox/private_key'
+
+[nginx]
+flask-app-example
+
+[postgresql]
+flask-app-example
+
+[all_groups:children]
+nginx
+postgresql

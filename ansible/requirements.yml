@@ -1,0 +1,6 @@
+- src: pkorobeinikov.locale
+- src: pkorobeinikov.tzdata
+- src: pkorobeinikov.apt-repository
+- src: pkorobeinikov.nginx
+- src: pkorobeinikov.postgresql
+- src: pkorobeinikov.pgbouncer
