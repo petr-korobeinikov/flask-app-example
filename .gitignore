@@ -1,0 +1,7 @@
+/ansible/roles/*
+!/ansible/roles/.gitkeep
+/ansible/ansible.cfg
+/ansible/playbook.retry
+
+/Vagrantfile
+/.vagrant/
