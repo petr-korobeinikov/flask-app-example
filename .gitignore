@@ -1,3 +1,5 @@
+*.pyc
+
 /ansible/roles/*
 !/ansible/roles/.gitkeep
 /ansible/ansible.cfg
