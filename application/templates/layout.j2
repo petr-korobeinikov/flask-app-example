@@ -3,6 +3,12 @@
     <title>flask-app-example</title>
 </head>
 <body>
+<h1><a href="{{ url_for('index') }}">flask-example-app</a></h1>
+<ul>
+    <li><a href="{{ url_for('signup') }}">sign up</a></li>
+    <li><a href="{{ url_for('signin') }}">sing in</a></li>
+    <li><a href="{{ url_for('signout') }}">sing out</a></li>
+</ul>
 {% block body %}{% endblock %}
 </body>
 </html>

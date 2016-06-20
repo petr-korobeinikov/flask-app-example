@@ -1,0 +1,38 @@
+{% extends 'layout.j2' %}
+
+{% block body %}
+    <h2>Sign Up</h2>
+    <form action="{{ url_for('signup') }}" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.id }}
+
+        <div>{{ form.username.label }}: {{ form.username(autofocus=true) }}</div>
+        {% if form.username.errors %}
+            <ul class="errors">
+                {% for error in form.username.errors %}
+                    {{ error }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div>{{ form.password.label }}: {{ form.password }}</div>
+        {% if form.password.errors %}
+            <ul class="errors">
+                {% for error in form.password.errors %}
+                    {{ error }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div>{{ form.password_confirm.label }}: {{ form.password_confirm }}</div>
+        {% if form.password_confirm.errors %}
+            <ul class="errors">
+                {% for error in form.password_confirm.errors %}
+                    {{ error }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <input type="submit" value="Sign Up">
+    </form>
+{% endblock %}
