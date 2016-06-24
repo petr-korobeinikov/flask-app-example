@@ -7,5 +7,5 @@ app.config.from_object('application.config.{}'.format(os.environ['APP_SETTINGS']
 
 db = SQLAlchemy(app)
 
+from application import auth
 from application import routes
-from application.models import Person
