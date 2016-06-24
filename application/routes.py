@@ -1,4 +1,4 @@
-from application import app, db
+from application import app
 from application.models import Person
 from application.forms import SignInForm, SignUpForm
 from flask import templating, redirect, url_for, flash
@@ -7,8 +7,7 @@ from flask_login import login_user, logout_user, login_required
 
 @app.route('/')
 def index():
-    now, name = db.engine.execute("select now(), 'flask'").fetchone()
-    return templating.render_template('index.j2', now=now, name=name)
+    return templating.render_template('index.j2')
 
 
 @app.route('/signup', methods=['GET', 'POST'])

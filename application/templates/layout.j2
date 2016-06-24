@@ -4,6 +4,9 @@
 </head>
 <body>
 <h1><a href="{{ url_for('index') }}">flask-example-app</a></h1>
+{% if current_user.is_authenticated %}
+    <div>Hello, {{ current_user.username }}!</div>
+{% endif %}
 <ul>
     {% if current_user.is_authenticated %}
         <li><a href="{{ url_for('signout') }}">sing out</a></li>
