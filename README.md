@@ -18,3 +18,9 @@
 
     $ workon <virtualenv-name>
     $ pip install -r requirements.txt
+
+### Load fixtures data (aka database sandboxing)
+
+    $ APP_SETTINGS=DevelopmentConfig python manage.py load_fixtures
+
+See `manage.py:load_fixtures()` for more details.
