@@ -4,7 +4,11 @@
     <h2>Posts</h2>
 
     {% for post in posts %}
-        <h3>{{ post.text|truncate(30) }} by {{ post.person.username }}</h3>
+        <h3>
+            <a href="{{ url_for('post_show', post_id=post.id) }}">
+                {{ post.text|truncate(30) }} by {{ post.person.username }}
+            </a>
+        </h3>
         <p>{{ post.text|truncate(150) }}</p>
     {% endfor %}
 {% endblock %}

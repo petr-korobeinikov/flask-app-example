@@ -9,3 +9,4 @@ db = SQLAlchemy(app)
 
 from application import auth
 from application import routes
+from application import errors

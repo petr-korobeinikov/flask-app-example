@@ -1,0 +1,6 @@
+{% extends 'layout.j2' %}
+
+{% block body %}
+    <h2>{{ post.text|truncate(30) }} by {{ post.person.username }}</h2>
+    <p>{{ post.text }}</p>
+{% endblock %}

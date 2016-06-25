@@ -1,7 +1,7 @@
 from application import app, db
 from application.models import Person, Post
 from application.forms import SignInForm, SignUpForm
-from flask import templating, redirect, url_for, flash
+from flask import templating, redirect, url_for, flash, abort
 from flask_login import login_user, logout_user, login_required
 
 
@@ -11,9 +11,17 @@ def index():
 
 
 @app.route('/posts/')
-def posts():
+def post_index():
     posts = db.session.query(Post).all()
     return templating.render_template('post_index.j2', posts=posts)
+
+
+@app.route('/posts/<int:post_id>')
+def post_show(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    if post is None:
+        abort(404)
+    return templating.render_template('post_show.j2', post=post)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
