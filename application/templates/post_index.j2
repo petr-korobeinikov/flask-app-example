@@ -1,0 +1,10 @@
+{% extends 'layout.j2' %}
+
+{% block body %}
+    <h2>Posts</h2>
+
+    {% for post in posts %}
+        <h3>{{ post.text|truncate(30) }} by {{ post.person.username }}</h3>
+        <p>{{ post.text|truncate(150) }}</p>
+    {% endfor %}
+{% endblock %}

@@ -25,3 +25,14 @@ class Person(db.Model):
 
     def get_id(self):
         return self.id
+
+
+class Post(db.Model):
+    __tablename__ = 'post'
+
+    id = db.Column(db.Integer, primary_key=True)
+    person_id = db.Column(db.Integer, db.ForeignKey('person.id'), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    created_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    person = db.relationship('Person')
