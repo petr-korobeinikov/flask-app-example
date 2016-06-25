@@ -1,0 +1,14 @@
+- model: application.models.Person
+  records:
+    - email: person1@example.com
+      username: person1
+      password: secret1
+      created_on: now()
+    - email: person2@example.com
+      username: person2
+      password: secret2
+      created_on: now()
+    - email: person3@example.com
+      username: person3
+      password: secret3
+      created_on: now()
