@@ -12,7 +12,7 @@ class Person(db.Model):
     created_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
-        return "<Person {}>".format(self.id)
+        return '<Person {}>'.format(self.id)
 
     def is_authenticated(self):
         return True
