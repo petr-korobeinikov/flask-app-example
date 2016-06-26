@@ -15,6 +15,7 @@
         <li><a href="{{ url_for('signin') }}">sing in</a></li>
     {% endif %}
     <li><a href="{{ url_for('post_index') }}">posts</a></li>
+    <li><a href="{{ url_for('post_new') }}">new post</a></li>
 </ul>
 {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>

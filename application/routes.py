@@ -46,6 +46,21 @@ def post_edit(post_id):
     return templating.render_template('post_edit.j2', form=form, post_id=post_id)
 
 
+@app.route('/posts/new', methods=['GET', 'POST'])
+@login_required
+def post_new():
+    post = Post()
+    form = PostForm(request.form, obj=post)
+    if request.method == 'POST' and form.validate():
+        post.text = form.text.data
+        post.person_id = current_user.id
+        db_session.add(post)
+        db_session.commit()
+        return redirect(url_for('post_show', post_id=post.id))
+
+    return templating.render_template('post_new.j2', form=form)
+
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()
