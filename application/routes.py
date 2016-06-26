@@ -1,5 +1,4 @@
-from application import app
-from application.database import db_session
+from application import app, db
 from application.models import Person, Post
 from application.forms import SignInForm, SignUpForm, PostForm
 from flask import templating, redirect, url_for, flash, abort, request
@@ -13,7 +12,7 @@ def index():
 
 @app.route('/posts/')
 def post_index():
-    posts = db_session.query(Post).order_by(Post.id).all()
+    posts = db.session.query(Post).order_by(Post.id).all()
     return templating.render_template('post_index.j2', posts=posts)
 
 
@@ -39,8 +38,8 @@ def post_edit(post_id):
     form = PostForm(request.form, obj=post)
     if request.method == 'POST' and form.validate():
         post.text = form.text.data
-        db_session.add(post)
-        db_session.commit()
+        db.session.add(post)
+        db.session.commit()
         return redirect(url_for('post_show', post_id=post_id))
 
     return templating.render_template('post_edit.j2', form=form, post_id=post_id)
@@ -54,8 +53,8 @@ def post_new():
     if request.method == 'POST' and form.validate():
         post.text = form.text.data
         post.person_id = current_user.id
-        db_session.add(post)
-        db_session.commit()
+        db.session.add(post)
+        db.session.commit()
         return redirect(url_for('post_show', post_id=post.id))
 
     return templating.render_template('post_new.j2', form=form)
@@ -71,8 +70,8 @@ def post_delete(post_id):
     if post.person_id != current_user.id:
         abort(403)
 
-    db_session.delete(post)
-    db_session.commit()
+    db.session.delete(post)
+    db.session.commit()
 
     return redirect(url_for('post_index'))
 
