@@ -1,8 +1,10 @@
 import datetime
-from application import db
+import sqlalchemy as db
+from application.database import Base
+from sqlalchemy.orm import relationship
 
 
-class Person(db.Model):
+class Person(Base):
     __tablename__ = 'person'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -27,7 +29,7 @@ class Person(db.Model):
         return self.id
 
 
-class Post(db.Model):
+class Post(Base):
     __tablename__ = 'post'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -35,4 +37,4 @@ class Post(db.Model):
     text = db.Column(db.Text, nullable=False)
     created_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
-    person = db.relationship('Person')
+    person = relationship(Person)

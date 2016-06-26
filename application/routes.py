@@ -1,8 +1,9 @@
-from application import app, db
+from application import app
+from application.database import db_session
 from application.models import Person, Post
-from application.forms import SignInForm, SignUpForm
-from flask import templating, redirect, url_for, flash, abort
-from flask_login import login_user, logout_user, login_required
+from application.forms import SignInForm, SignUpForm, PostForm
+from flask import templating, redirect, url_for, flash, abort, request
+from flask_login import login_user, logout_user, login_required, current_user
 
 
 @app.route('/')
@@ -12,7 +13,7 @@ def index():
 
 @app.route('/posts/')
 def post_index():
-    posts = db.session.query(Post).all()
+    posts = db_session.query(Post).order_by(Post.id).all()
     return templating.render_template('post_index.j2', posts=posts)
 
 
@@ -22,6 +23,27 @@ def post_show(post_id):
     if post is None:
         abort(404)
     return templating.render_template('post_show.j2', post=post)
+
+
+@app.route('/posts/edit/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def post_edit(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+
+    if post is None:
+        abort(404)
+
+    if post.person_id != current_user.id:
+        abort(403)
+
+    form = PostForm(request.form, obj=post)
+    if request.method == 'POST' and form.validate():
+        post.text = form.text.data
+        db_session.add(post)
+        db_session.commit()
+        return redirect(url_for('post_show', post_id=post_id))
+
+    return templating.render_template('post_edit.j2', form=form, post_id=post_id)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
