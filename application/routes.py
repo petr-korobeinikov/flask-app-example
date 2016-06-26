@@ -3,6 +3,8 @@ from application.models import Person, Post
 from application.forms import SignInForm, SignUpForm, PostForm
 from flask import templating, redirect, url_for, flash, abort, request
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_paginate import Pagination
+from sqlalchemy import func
 
 
 @app.route('/')
@@ -12,8 +14,18 @@ def index():
 
 @app.route('/posts/')
 def post_index():
-    posts = db.session.query(Post).order_by(Post.id).all()
-    return templating.render_template('post_index.j2', posts=posts)
+    per_page = 3
+
+    try:
+        page = int(request.args.get('page', 1))
+    except ValueError:
+        page = 1
+
+    count = db.session.query(func.count(Post.id)).scalar()
+    posts = db.session.query(Post).order_by(Post.id).limit(per_page).offset(page * per_page - per_page)
+
+    pagination = Pagination(page=page, total=count, record_name='posts', per_page=per_page)
+    return templating.render_template('post_index.j2', posts=posts, pagination=pagination)
 
 
 @app.route('/posts/<int:post_id>')

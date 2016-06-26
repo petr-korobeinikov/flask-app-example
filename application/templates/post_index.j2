@@ -17,4 +17,7 @@
         </h3>
         <p>{{ post.text|truncate(150) }}</p>
     {% endfor %}
+
+    {{ pagination.info }}
+    {{ pagination.links }}
 {% endblock %}
