@@ -61,6 +61,22 @@ def post_new():
     return templating.render_template('post_new.j2', form=form)
 
 
+@app.route('/posts/delete/<int:post_id>', methods=['GET'])
+def post_delete(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+
+    if post is None:
+        abort(404)
+
+    if post.person_id != current_user.id:
+        abort(403)
+
+    db_session.delete(post)
+    db_session.commit()
+
+    return redirect(url_for('post_index'))
+
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()

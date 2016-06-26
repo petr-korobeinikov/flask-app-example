@@ -9,7 +9,10 @@
                 {{ post.text|truncate(30) }} by {{ post.person.username }}
             </a>
             {% if post.person_id == current_user.id %}
-                [ <a href="{{ url_for('post_edit', post_id=post.id) }}">edit post</a> ]
+                [
+                <a href="{{ url_for('post_edit', post_id=post.id) }}">edit post</a>
+                <a href="{{ url_for('post_delete', post_id=post.id) }}">delete post</a>
+                ]
             {% endif %}
         </h3>
         <p>{{ post.text|truncate(150) }}</p>
