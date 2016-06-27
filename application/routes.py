@@ -90,8 +90,18 @@ def post_delete(post_id):
 
 @app.route('/people')
 def person_index():
-    people = db.session.query(Person).order_by(Person.id)
-    return templating.render_template('person_index.j2', people=people)
+    per_page = 3
+
+    try:
+        page = int(request.args.get('page', 1))
+    except ValueError:
+        page = 1
+
+    count = db.session.query(func.count(Person.id)).scalar()
+    people = db.session.query(Person).order_by(Person.id).limit(per_page).offset(page * per_page - per_page)
+
+    pagination = Pagination(page=page, total=count, per_page=per_page)
+    return templating.render_template('person_index.j2', people=people, pagination=pagination)
 
 
 @app.route('/people/<int:person_id>')
