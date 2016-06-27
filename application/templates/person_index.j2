@@ -1,0 +1,23 @@
+{% extends 'layout.j2' %}
+
+{% block body %}
+    <h2>People</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in people %}
+            <tr>
+                <th scope="row">{{ person.id }}</th>
+                <td>
+                    <a href="{{ url_for('person_show', person_id=person.id) }}">@{{ person.username }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

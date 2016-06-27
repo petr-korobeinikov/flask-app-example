@@ -88,6 +88,22 @@ def post_delete(post_id):
     return redirect(url_for('post_index'))
 
 
+@app.route('/people')
+def person_index():
+    people = db.session.query(Person).order_by(Person.id)
+    return templating.render_template('person_index.j2', people=people)
+
+
+@app.route('/people/<int:person_id>')
+def person_show(person_id):
+    person = Person.query.filter_by(id=person_id).first()
+
+    if person is None:
+        abort(404)
+
+    return templating.render_template('person_show.j2', person=person)
+
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()
