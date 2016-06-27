@@ -1,25 +1,52 @@
 <html>
 <head>
     <title>flask-app-example</title>
+    <link rel=stylesheet
+          type=text/css
+          href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
 </head>
 <body>
-<h1><a href="{{ url_for('index') }}">flask-example-app</a></h1>
-{% if current_user.is_authenticated %}
-    <div>Hello, {{ current_user.username }}!</div>
-{% endif %}
-<ul>
-    {% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('signout') }}">sing out</a></li>
-    {% else %}
-        <li><a href="{{ url_for('signup') }}">sign up</a></li>
-        <li><a href="{{ url_for('signin') }}">sing in</a></li>
-    {% endif %}
-    <li><a href="{{ url_for('post_index') }}">posts</a></li>
-    <li><a href="{{ url_for('post_new') }}">new post</a></li>
-</ul>
-{% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-{% endfor %}
-{% block body %}{% endblock %}
+<div class="containter-fluid">
+    <nav class="navbar navbar-light">
+        <ul class="nav navbar-nav">
+            {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Hello, {{ current_user.username }}!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signout') }}">sign out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signup') }}">sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signin') }}">sign in</a>
+                </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('post_index') }}">posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('post_new') }}">new post</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-3">flask-example-app</h1>
+        <p class="lead">This is a simple application written in Python using Flask.</p>
+    </div>
+</div>
+<div class="container-fluid">
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block body %}{% endblock %}
+</div>
 </body>
 </html>

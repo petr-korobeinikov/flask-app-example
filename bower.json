@@ -1,0 +1,21 @@
+{
+  "name": "flask-app-example",
+  "homepage": "https://github.com/pkorobeinikov/flask-app-example",
+  "authors": [
+    "Petr Korobeinikov <pkorobeinikov@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT, BSD",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.2"
+  }
+}
