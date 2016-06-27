@@ -19,6 +19,10 @@
     $ workon <virtualenv-name>
     $ pip install -r requirements.txt
 
+### Install bower components
+
+    $ bower install
+
 ### Load fixtures data (aka database sandboxing)
 
     $ APP_SETTINGS=DevelopmentConfig python manage.py load_fixtures
