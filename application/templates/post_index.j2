@@ -22,9 +22,10 @@
                 </td>
                 <td>@{{ post.person.username }}</td>
                 <td>
+                    <a href="{{ url_for('post_show', post_id=post.id) }}">show post</a>
                     {% if post.person_id == current_user.id %}
                         <a href="{{ url_for('post_edit', post_id=post.id) }}">edit post</a>
-                        <a href="{{ url_for('post_delete', post_id=post.id) }}">delete post</a>
+                        <a class="text-danger" href="{{ url_for('post_delete', post_id=post.id) }}">delete post</a>
                     {% endif %}
                 </td>
             </tr>
