@@ -24,7 +24,7 @@ def post_index():
     count = db.session.query(func.count(Post.id)).scalar()
     posts = db.session.query(Post).order_by(Post.id).limit(per_page).offset(page * per_page - per_page)
 
-    pagination = Pagination(page=page, total=count, record_name='posts', per_page=per_page)
+    pagination = Pagination(page=page, total=count, per_page=per_page)
     return templating.render_template('post_index.j2', posts=posts, pagination=pagination)
 
 
