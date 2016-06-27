@@ -72,7 +72,7 @@ def post_new():
     return templating.render_template('post_new.j2', form=form)
 
 
-@app.route('/posts/delete/<int:post_id>', methods=['GET'])
+@app.route('/posts/delete/<int:post_id>')
 def post_delete(post_id):
     post = Post.query.filter_by(id=post_id).first()
 
