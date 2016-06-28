@@ -6,6 +6,10 @@ flask-app-example
 [postgresql]
 flask-app-example
 
+[python]
+flask-app-example
+
 [all_groups:children]
 nginx
 postgresql
+python

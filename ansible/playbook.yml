@@ -2,3 +2,4 @@
 - include: common.yml
 - include: nginx.yml
 - include: postgresql.yml
+- include: python.yml

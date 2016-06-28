@@ -4,6 +4,9 @@ upstream python {
     # proxy pass to host machine;
     # it's quite convinient in development environments while developing web apps in true fastcgi mode (not in php)
     server 10.0.0.1:5000;
+
+    # proxy pass to localhost, use for configured remote interpreters.
+    # server localhost:5000;
 }
 
 server {
