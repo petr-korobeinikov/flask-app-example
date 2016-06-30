@@ -3,3 +3,5 @@
 - include: nginx.yml
 - include: postgresql.yml
 - include: python.yml
+- include: devtool.yml
+  when: ansible_virtualization_type == 'virtualbox'

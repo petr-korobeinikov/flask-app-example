@@ -1,5 +1,12 @@
 Vagrant.require_version '>= 1.8.1'
 
+$install_ansible = <<INSTALL_ANSIBLE
+apt-add-repository ppa:ansible/ansible --assume-yes
+apt-get update
+apt-get install software-properties-common --assume-yes
+apt-get install ansible  --assume-yes
+INSTALL_ANSIBLE
+
 Vagrant.configure(2) do |config|
   config.vm.box = 'ubuntu/trusty64'
 
@@ -7,5 +14,9 @@ Vagrant.configure(2) do |config|
     box.vm.hostname = 'flask-app-example'
     box.vm.network :private_network, ip: '10.0.0.20'
     box.vm.network :forwarded_port, guest: 22, host: 2220, id: 'ssh'
+
+    if (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil then
+      config.vm.provision :shell, inline: $install_ansible
+    end
   end
 end

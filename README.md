@@ -14,6 +14,13 @@
     $ ansible-galaxy install -r requirements.yml
     $ ansible-playbook -i inventory/vagrant playbook.yml
 
+### Deploy state of vm with local connection (for Windows users)
+
+    $ vagrant ssh
+    $ cd /vagrant/ansible
+    $ ansible-galaxy install -r requirements.yml
+    $ ansible-playbook -i inventory/vagrant -c local playbook.yml
+
 ### Install requirements
 
     $ workon <virtualenv-name>

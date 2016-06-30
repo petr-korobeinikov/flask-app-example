@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - role: pkorobeinikov.apt-repository
+      apt_repository_repositories:
+        - repo: deb https://deb.nodesource.com/node_6.x trusty main
+          key: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+
+  tasks:
+    - name: install git
+      apt: name=git-core state=present
+
+    - name: install nodejs
+      apt: name=nodejs state=present
+
+    - name: install npm packages
+      npm: name={{ item }} global=yes
+      with_items:
+        - bower
+        - grunt
