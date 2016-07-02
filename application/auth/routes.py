@@ -1,7 +1,7 @@
 from application.auth import auth
 from application.auth.forms import SignInForm, SignUpForm
 from application import db
-from application.models import Person
+from application.people.models import Person
 from flask import templating, redirect, url_for, flash
 from flask_login import login_user, logout_user
 

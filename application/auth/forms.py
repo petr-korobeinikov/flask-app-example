@@ -2,7 +2,7 @@ from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
-from application.models import Person
+from application.people.models import Person
 from application.util.wtforms_validation import UniqueField
 
 

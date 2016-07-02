@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, url_for
 from flask_login import LoginManager
 from application import app
-from application.models import Person
+from application.people.models import Person
 
 auth = Blueprint('auth', __name__,
                  template_folder='templates')

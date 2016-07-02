@@ -7,9 +7,11 @@ app.config.from_object('application.config.{}'.format(os.environ['APP_SETTINGS']
 
 db = SQLAlchemy(app)
 
+from application.people import people
 from application.blogging import blogging
 from application.auth import auth
 
+app.register_blueprint(people, url_prefix='/people')
 app.register_blueprint(blogging, url_prefix='/blog')
 app.register_blueprint(auth)
 
