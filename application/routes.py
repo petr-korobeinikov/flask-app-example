@@ -107,10 +107,11 @@ def person_index():
 @app.route('/me')
 @app.route('/people/<int:person_id>')
 def person_show(person_id=None):
-    if person_id is None and current_user.is_authenticated:
-        person_id = current_user.id
-    else:
-        abort(403)
+    if person_id is None:
+        if current_user.is_authenticated:
+            person_id = current_user.id
+        else:
+            abort(403)
 
     person = Person.query.filter_by(id=person_id).first()
 
