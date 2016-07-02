@@ -8,4 +8,4 @@
 /Vagrantfile
 /.vagrant/
 
-/application/static/bower_components
+/static/bower_components
