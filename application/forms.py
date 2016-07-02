@@ -1,10 +1,19 @@
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, HiddenField, TextAreaField
 from wtforms.validators import DataRequired, Length, EqualTo
+from application.models import Person
+from application.util.wtforms_validation import UniqueField
 
 
 class SignUpForm(Form):
-    username = StringField('username', validators=[DataRequired()])
+    username = StringField('username', validators=[
+        DataRequired(),
+        UniqueField(model=Person)
+    ])
+    email = StringField('email', validators=[
+        DataRequired(),
+        UniqueField(model=Person)
+    ])
     password = PasswordField('password', validators=[DataRequired(), Length(min=6)])
     password_confirm = PasswordField('password_confirm', validators=[
         DataRequired(),
