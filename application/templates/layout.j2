@@ -26,16 +26,16 @@
                     <a class="nav-link" href="{{ url_for('person_show') }}">{{ current_user.username }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('signout') }}">sign out</a>
+                    <a class="nav-link" href="{{ url_for('auth.signout') }}">sign out</a>
                 </li>
             </ul>
         {% else %}
             <ul class="nav navbar-nav pull-xs-right">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('signup') }}">sign up</a>
+                    <a class="nav-link" href="{{ url_for('auth.signup') }}">sign up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('signin') }}">sign in</a>
+                    <a class="nav-link" href="{{ url_for('auth.signin') }}">sign in</a>
                 </li>
             </ul>
         {% endif %}
