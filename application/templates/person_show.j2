@@ -1,7 +1,16 @@
 {% extends 'layout.j2' %}
 
 {% block body %}
-    <h2>@{{ person.username }}</h2>
+    <h2>Posts by @{{ person.username }}</h2>
 
-    <p>&hellip;</p>
+    {% for post in person.posts %}
+        <ul>
+            <li>
+                <a href="{{ url_for('post_show', post_id=post.id) }}">{{ post.text|truncate(30) }}</a>
+            </li>
+        </ul>
+    {% else %}
+        No posts found.
+    {% endfor %}
+
 {% endblock %}

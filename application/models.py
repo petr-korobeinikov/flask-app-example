@@ -9,6 +9,8 @@ class Person(db.Model):
     password = db.Column(db.String(60))
     created_on = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    posts = db.relationship('Post')
+
     def __repr__(self):
         return '<Person {}>'.format(self.id)
 
