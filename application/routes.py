@@ -119,7 +119,16 @@ def signup():
     form = SignUpForm()
 
     if form.validate_on_submit():
-        pass
+        person = Person()
+        person.username = form.username.data
+        person.email = form.email.data
+        person.password = form.password.data
+
+        db.session.add(person)
+        db.session.commit()
+
+        login_user(person, remember=True)
+        return redirect(url_for('index'))
 
     return templating.render_template('signup.j2', form=form)
 
