@@ -8,25 +8,8 @@
 <body>
 <div class="containter-fluid">
     <nav class="navbar navbar-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}">flask-app-example</a>
         <ul class="nav navbar-nav">
-            {% if current_user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Hello, {{ current_user.username }}!</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('signout') }}">sign out</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('signup') }}">sign up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('signin') }}">sign in</a>
-                </li>
-            {% endif %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('index') }}">home</a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('post_index') }}">posts</a>
             </li>
@@ -37,6 +20,25 @@
                 <a class="nav-link" href="{{ url_for('person_index') }}">people</a>
             </li>
         </ul>
+        {% if current_user.is_authenticated %}
+            <ul class="nav navbar-nav pull-xs-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ current_user.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signout') }}">sign out</a>
+                </li>
+            </ul>
+        {% else %}
+            <ul class="nav navbar-nav pull-xs-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signup') }}">sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signin') }}">sign in</a>
+                </li>
+            </ul>
+        {% endif %}
     </nav>
 </div>
 <div class="jumbotron jumbotron-fluid">
