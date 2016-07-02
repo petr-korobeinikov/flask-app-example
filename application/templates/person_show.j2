@@ -6,7 +6,7 @@
     {% for post in person.posts %}
         <ul>
             <li>
-                <a href="{{ url_for('post_show', post_id=post.id) }}">{{ post.text|truncate(30) }}</a>
+                <a href="{{ url_for('blogging.post_show', post_id=post.id) }}">{{ post.text|truncate(30) }}</a>
             </li>
         </ul>
     {% else %}

@@ -2,8 +2,8 @@
 {% from 'macro.j2' import form_row_submit %}
 
 {% block body %}
-    <h2>New Post</h2>
-    <form action="{{ url_for('post_new') }}" method="post">
+    <h2>Edit Post</h2>
+    <form action="{{ url_for('blogging.post_edit', post_id=post_id) }}" method="post">
         {{ form.hidden_tag() }}
         {{ form.id }}
 
