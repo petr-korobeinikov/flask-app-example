@@ -23,7 +23,7 @@
         {% if current_user.is_authenticated %}
             <ul class="nav navbar-nav pull-xs-right">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">{{ current_user.username }}</a>
+                    <a class="nav-link" href="{{ url_for('person_show') }}">{{ current_user.username }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('signout') }}">sign out</a>
